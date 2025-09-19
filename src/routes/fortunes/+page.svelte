@@ -78,7 +78,7 @@
     {#await pokemon}
         <span></span>
     {:then pokemon} 
-        <h3>You are a <a href="https://bulbapedia.bulbagarden.net/wiki/{pokemon.name}_(Pok%C3%A9mon)">{pokemon.name}</a>!</h3>
+        <h3>You are a <a href="https://bulbapedia.bulbagarden.net/wiki/{pokemon.name.replaceAll(' ', '_')}_(Pok%C3%A9mon)">{pokemon.name}</a>!</h3>
         <p>Pokedex national ID '{pokemon.id}'</p>
         <img src="{pokemon?.sprites?.front_default}" alt="An image sprite of {pokemon.name}" id="poke-sprite" />
         <audio autoplay volume="{0.1}">
