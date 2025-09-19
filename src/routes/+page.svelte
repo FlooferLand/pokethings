@@ -1,3 +1,9 @@
+<script lang="ts">
+    import MetadataComponent from "$components/MetadataComponent.svelte";
+</script>
+
+<MetadataComponent />
+
 <h3>Welcome to Pokethings!</h3>
 <p>This subdomain just has random Pokemon-related stuff I make xD</p>
 

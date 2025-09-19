@@ -13,7 +13,8 @@ const config = {
 			strict: true
 		}),
 		alias: {
-			"$styles": "src/styles"
+			"$styles": "src/styles",
+			"$components": "src/components"
 		}
 	}
 };

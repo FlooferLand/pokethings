@@ -1,4 +1,6 @@
 <script lang="ts">
+    import MetadataComponent from "$components/MetadataComponent.svelte";
+
     type PokemonSprites = {
         front_default: string
     }
@@ -21,33 +23,31 @@
         return diffDays + 1;
     }
 
-    let pokeImage: HTMLImageElement
     let birthday: Date | null = $state(null)
-    let pokemon: PokemonData | null = $state(null)
-    const fetchMon = async () => {
+    let pokemon: Promise<PokemonData> | null = $state(null)
+    const fetchMon = () => {
         if (birthday == null || birthday == undefined) return;
         
         // Fetching
         const day = dayOfTheYear(new Date(birthday));
-        const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${day}`);
-        const data = await res.json()
-        pokemon = data as PokemonData;
-
-        // Image
-        const imageUrl = pokemon?.sprites?.front_default;
-        if (imageUrl != null && imageUrl != undefined) {
-
-        }
-
-        // Audio
-        const cryUrl = pokemon?.cries?.latest;
-        if (cryUrl != null && cryUrl != undefined) {
-            const audio = new Audio(cryUrl);
-            audio.volume = 0.1;
-            await audio.play();
-        }
+        pokemon = new Promise((resolve, reject) => {
+            fetch(`https://pokeapi.co/api/v2/pokemon/${day}`)
+                .then(res => {                    
+                    res.json()
+                        .then(data => {
+                            resolve(data as PokemonData);
+                        })
+                        .catch(err => reject(err))
+                })
+                .catch(err => reject(err));
+        });
     }
 </script>
+
+<MetadataComponent
+    title="Fortune Hunters book recreation"
+    description="Find out which Pokemon you would be lucky to be paired with."
+/>
 
 <p>
     The episode
@@ -62,23 +62,38 @@
     we can achieve a similar effect!
 </p>
 
-<form onsubmit={fetchMon}>
-    <label>
-        Birthday date
-        <input type="date" bind:value={birthday} required />
-    </label>
-    <button type="submit">Give me my Pokemon</button>
-</form>
+<div class="panel">
+    <form onsubmit={fetchMon}>
+        <label>
+            Your birthday:
+            <input type="date" bind:value={birthday} required />
+        </label>
+        <button type="submit">Give me my Pokemon</button>
+    </form>
+</div>
 
 {#if pokemon != null}
-    <h3>You are a {pokemon.name}!</h3>
-    <p>Pokedex national ID '{pokemon.id}'</p>
-    <img src="{pokemon?.sprites?.front_default}" alt="An image sprite of {pokemon.name}" id="poke-sprite" />
+    {#await pokemon}
+        <span></span>
+    {:then pokemon} 
+        <h3>You are a {pokemon.name}!</h3>
+        <p>Pokedex national ID '{pokemon.id}'</p>
+        <img src="{pokemon?.sprites?.front_default}" alt="An image sprite of {pokemon.name}" id="poke-sprite" />
+        <audio autoplay volume="{0.1}">
+            <source src="{pokemon?.cries?.latest}" type="audio/ogg" />
+        </audio>
+    {/await}
 {/if}
 
 <style lang="scss">
     #poke-sprite {
         width: 400pt;
         image-rendering: pixelated;
+    }
+    form {
+        input, button {
+            display: block;
+            margin: 0.3rem 0rem;
+        }
     }
 </style>
