@@ -17,15 +17,18 @@
 
     // Magic function i stole >:)
     function dayOfTheYear(date: Date): number {
-        console.log(date);
         const start = Date.UTC(date.getUTCFullYear(), 0, 1);
         const current = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
         const diffDays = Math.floor((current - start) / (24 * 60 * 60 * 1000));
-        return diffDays + 1;
+        return diffDays + 2;
     }
 
     let birthday: Date | null = $state(null)
     let pokemon: Promise<PokemonData> | null = $state(null)
+    $effect(() => {
+        birthday;
+        fetchMon();
+    });
     const fetchMon = () => {
         if (birthday == null || birthday == undefined) return;
         
@@ -75,7 +78,7 @@
     {#await pokemon}
         <span></span>
     {:then pokemon} 
-        <h3>You are a {pokemon.name}!</h3>
+        <h3>You are a <a href="https://bulbapedia.bulbagarden.net/wiki/{pokemon.name}_(Pok%C3%A9mon)">{pokemon.name}</a>!</h3>
         <p>Pokedex national ID '{pokemon.id}'</p>
         <img src="{pokemon?.sprites?.front_default}" alt="An image sprite of {pokemon.name}" id="poke-sprite" />
         <audio autoplay volume="{0.1}">
