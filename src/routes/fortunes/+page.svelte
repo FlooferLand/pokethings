@@ -1,5 +1,6 @@
 <script lang="ts">
     import MetadataComponent from "$components/MetadataComponent.svelte";
+    import { DateInput } from "date-picker-svelte";
 
     type PokemonSprites = {
         front_default: string
@@ -63,13 +64,11 @@
 </p>
 
 <div class="panel">
-    <form onsubmit={fetchMon}>
-        <label>
-            Your birthday:
-            <input type="date" bind:value={birthday} required />
-        </label>
-        <button type="submit">Give me my Pokemon</button>
-    </form>
+    <label>
+        Your birthday:
+        <DateInput bind:value={birthday} format="dd/MM/yyyy" required closeOnSelection />
+    </label>
+    <button onclick={fetchMon}>Give me my Pokemon</button>
 </div>
 
 {#if pokemon != null}
@@ -95,5 +94,10 @@
             display: block;
             margin: 0.3rem 0rem;
         }
+    }
+
+    :root {
+        --date-picker-background: #1b1e27;
+	    --date-picker-foreground: #f7f7f7;
     }
 </style>
