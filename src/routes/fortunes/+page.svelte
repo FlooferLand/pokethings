@@ -66,7 +66,7 @@
 <div class="panel">
     <label>
         Your birthday:
-        <DateInput bind:value={birthday} format="dd-MM-yyyy" required closeOnSelection />
+        <DateInput bind:value={birthday} format="dd-MM-yyyy" placeholder="19-04-2006" required closeOnSelection />
     </label>
     <button onclick={fetchMon}>Give me my Pokemon</button>
 </div>
