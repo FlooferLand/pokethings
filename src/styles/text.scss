@@ -1,0 +1,38 @@
+p, label {
+	padding: 0;
+	margin: 0 0 0.5rem 0;
+	color: var(--text-color);
+	user-select: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 1.2rem 0 0.5rem 0;
+	color: var(--text-color);
+	user-select: none;
+}
+
+.remark, small {
+	opacity: 60%;
+}
+
+a, a:visited {
+	color: color-mix(in srgb, var(--primary-color) 80%, var(--text-color));
+}
+
+a, br, img {
+	-webkit-user-drag: none;
+	user-select: none;
+}
+
+span, details {
+	user-select: none;
+}
+
+.website-name {
+	color: color-mix(in srgb, var(--primary-color) 60%, white);
+}
+
+.selectable {
+	user-select: text;
+}

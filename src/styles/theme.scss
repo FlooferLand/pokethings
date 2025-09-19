@@ -1,0 +1,32 @@
+@mixin dark-theme {
+	--background-color: #1a1b1f;
+	--primary-color: #ebdb28;
+	--warn-color: #ffda07;
+	--text-color: #fff;
+}
+@mixin light-theme {
+	--background-color: #d2d5ec;
+	--primary-color: #b8a120;
+	--warn-color: #e8b51c;
+	--text-color: #000;
+}
+
+:root {
+	@include dark-theme;
+	color-scheme: light dark;
+}
+:root[color-scheme="light"] {
+	@include light-theme;
+}
+:root[color-scheme="dark"] {
+	@include dark-theme;
+}
+
+[data-theme="light"] {
+	@include light-theme;
+	color-scheme: light;
+}
+[data-theme="dark"] {
+	@include dark-theme;
+	color-scheme: dark;
+}

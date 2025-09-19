@@ -1,0 +1,60 @@
+@use "text";
+@use "theme";
+
+html {
+	color-scheme: dark;
+	font-size: 140%;
+}
+
+body {
+	font-family: sans-serif;
+	background-color: var(--background-color);
+	padding: 0 !important;
+	margin: 0 !important;
+	height: 100% !important;
+	width: 100% !important;
+	overflow-x: clip;
+}
+
+ol, ul {
+	padding-top: 0;
+	padding-left: 1.4rem;
+
+	li {
+		padding-bottom: 0.15rem;
+	}
+}
+
+details {
+	padding: 0.8rem;
+	background-color: color-mix(in srgb, light-dark(white, black) 15%, transparent);
+	border: 2pt solid #fff1;
+
+	&:not([open]):hover {
+		background-color: color-mix(in srgb, var(--background-color) 98%, transparent);
+	}
+}
+
+.username {
+    background-color: color-mix(in srgb, var(--background-color) 50%, light-dark(white, black));
+	padding: 0.3rem;
+	margin: 0;
+}
+
+.panel {
+	padding: 0.5rem;
+	background-color: color-mix(in srgb, light-dark(white, black) 20%, transparent);
+	border: 2pt solid #fff1;
+}
+
+.warn-panel {
+	padding: 0.5rem;
+	background-color: color-mix(in srgb, var(--warn-color) 20%, transparent);
+	border: 2pt solid #fff1;
+}
+
+.codeblock {
+	padding: 0.5rem;
+	background-color: color-mix(in srgb, var(--background-color) 55%, light-dark(white, black));
+	overflow: hidden;
+}
