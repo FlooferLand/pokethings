@@ -17,4 +17,12 @@
     <meta name="og:url" content="https://pokethings.flooferland.com/" />
     <meta name="og:description" content={description} />
     <meta name="og:type" content="website" />
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org/",
+        "@type": "WebSite",
+        "name": "pokethings",
+        "url": "https://pokethings.flooferland.com"
+    }
+    </script>
 </svelte:head>
